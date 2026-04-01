@@ -322,7 +322,7 @@ with a collection of \emph{specialized agents}, including code-specific agents
 tailored to individual simulation tools (e.g., Sierra/Aria, SPARC, Dakota)
 and \textit{execution agents} tailored to submitting and managing HPC jobs.
 The code-specific agents will encode detailed knowledge of input-deck
-construction, meshing strategies, solver configurations, execution workflows,
+construction, solver configurations, execution workflows,
 and post-processing, while the execution agents will encode knowledge of HPC
 environments, resource availability, and job submission. Initially, these
 agents will be constructed through feature engineering and task-specific agent
@@ -330,21 +330,21 @@ design.
 %Rather than pursuing MCP at the fine-grained code level, we will instead
 %develop task-specific agents with complete knowledge of how to execute the
 %simulation workflow. 
-To help these agents navigate DOE's complex computational ecosystem, we will develop
+To facilitate the ability of these agents to navigate DOE's complex computational ecosystem, we will develop
 retrieval augmented generation (RAG) pipelines to improve retrieval. These tool-specific retrieval pipelines will treat documentation, prior workflows, and validated inputs as retrievable
-knowledge sources at inference time, thereby enabling robust deployment on codebases not seen within LLM training. To effectively manage multimodal
-information, these retrieval pipelines will leverage hybrid search strategies~\cite{edge2025localglobalgraphrag,formal2021spladesparselexicalexpansion,yue2026foamagentautomatedintelligentcfd},
-combining similarity searches on embeddings with keyword matching and metadata
-constraints to identify relevant context.
-
-Within this activity, we will also address open questions in agentic design.
-First, we propose an ``ensemble-based'' approach in which multiple prompts with
-the same intended meaning are generated and evaluated across multiple backend
-LLMs. Variance across these responses, for example in tool calling or input
-deck generation, provides a measure of uncertainty and highlights when human
-intervention is required. Second, we will address the open challenge of
-scalability to many interacting agent systems.  \textit{Lead:
+knowledge sources at inference time, thereby enabling robust deployment on codebases not seen within LLM training. To effectively manage multimodal information, these retrieval pipelines will leverage hybrid search strategies~\cite{edge2025localglobalgraphrag,formal2021spladesparselexicalexpansion,yue2026foamagentautomatedintelligentcfd}, combining similarity searches on embeddings with keyword matching and metadata
+constraints to identify relevant context. \textit{Lead:
 [PI/Co-PI names]. Budget: [insert amount or \% effort].}
+
+%This first task addresses various open research questions in agentic AI. Foremost, we propose research that addresses both scalability across a myriad of tools and 
+%we will address both scalabilty
+%Within this activity, we will also address open questions in agentic design.
+%First, we propose an ``ensemble-based'' approach in which multiple prompts with
+%the same intended meaning are generated and evaluated across multiple backend
+%LLMs. Variance across these responses, for example in tool calling or input
+%deck generation, provides a measure of uncertainty and highlights when human
+%intervention is required. Second, we will address the open challenge of
+%scalability to many interacting agent systems.  
 %define schema-based workflow representations for analysis intent, required
 %files, validation checks, execution state, and outputs. On top of these
 %representations, we will develop planning and code-specific agents that can
@@ -391,52 +391,64 @@ The Phase I effort is organized around five milestones that move the project
 from initial architecture definition to an end-to-end human-in-the-loop
 demonstration.
 
-\paragraph{Milestone 1: Core architecture and workflow representations
-(Months 1--2).} Define the initial architecture for GENESIS-AGENT, including
-workflow schemas, the initial data and document sources used for retrieval,
-provenance structures, and benchmark problems. This milestone will establish
-the structured representations needed for both outer-loop analyses and
-physics-code workflows, and it will provide the base interfaces on which the
-remaining components are built. Completion criterion: a documented
-architecture, an initial benchmark suite, and working schema definitions for
-both outer-loop and physics-code workflows.
+\begin{itemize}[leftmargin=1.2em,itemsep=0.2em,topsep=0.2em]
+\item \textbf{Milestone 1: Specialized agents for physics codes (Months 1--3).}
+Develop agents specialized to candidate physics codebases, including
+SIERRA/Solid Mechanics, SPARC, and the OpenFOAM thread that builds from
+FOAM-agent. These agents will encode knowledge of relevant physics, schemas,
+and execution commands, and they will support input generation, consistency
+checks, and error detection for candidate simulation workflows.
+\textit{Completion criterion: code-specific agents generate candidate inputs
+and pass basic validation checks for the selected benchmark problems.}
 
-\paragraph{Milestone 2: Specialized agents for outer-loop analyses
-(Months 2--4).} Develop agents specialized to the setup and execution of
-outer-loop analyses such as uncertainty quantification and inverse problems.
-These agents will be able to translate natural-language requests into
-structured study definitions, formulate execution plans, and orchestrate
-downstream analysis tasks through validated workflow objects. Completion
-criterion: at least one outer-loop agent produces valid study definitions and
-executable plans for representative benchmark problems.
+\item \textbf{Milestone 2: Specialized agents for outer-loop analyses (Months
+2--4).} Develop agents specialized to the setup and execution of outer-loop
+analyses using Dakota or a related tool (PyTUK, rom-tools-and-workflows). These agents
+will translate natural-language requests into structured study definitions,
+formulate execution plans, and orchestrate downstream analysis tasks through
+validated workflow objects. \textit{Completion criterion: at least one
+outer-loop agent produces valid study definitions and executable plans for
+representative benchmark problems.}
 
-\paragraph{Milestone 3: Specialized agents for physics codes
-(Months 3--5).} Develop agents specialized to candidate physics codebases,
-including SIERRA/Solid Mechanics, SPARC, and the OpenFOAM thread that builds
-from FOAM-agent. These agents will encode knowledge of relevant physics,
-schemas, and execution commands, and they will support input generation,
-consistency checks, and error detection for candidate simulation workflows.
-Completion criterion: code-specific agents generate candidate inputs and pass
-basic validation checks for the selected benchmark problems.
+%\item \textbf{Milestone 3: Agent orchestration and workflow representations
+%(Months 1--5).} Define the core architecture for GENESIS-AGENT, including
+%workflow schemas, the initial data and document sources used for retrieval,
+%provenance structures, and benchmark problems. This milestone will establish
+%the structured representations needed to connect outer-loop analyses,
+%physics-code workflows, and human review within a common framework.
+%\textit{Completion criterion: a documented architecture, an initial benchmark
+%suite, and working schema definitions for both outer-loop and physics-code
+%workflows.}
 
-\paragraph{Milestone 4: MCP integration, validation, and secure execution
+\item \textbf{Milestone 3: Agent orchestration and workflow representations
+(Months 1--5).} Establish the core architectural contribution of
+GENESIS-AGENT: a structured framework for coordinating role-specialized agents
+across the modeling and simulation lifecycle. We will develop workflow schemas
+that formalize how agents decompose tasks, exchange context, and compose
+multi-stage workflows. \textit{Completion criterion: a documented architecture, an initial
+benchmark suite, and validated schema definitions enabling coordinated,
+multi-agent execution across coupled workflows.}
+
+
+\item \textbf{Milestone 4: MCP integration, validation, and secure execution
 (Months 4--7).} Implement MCP services for reusable actions such as job
 submission, monitoring, data management, validation, and provenance capture.
 This milestone will also study the appropriate abstraction level for MCP
 interfaces so that they remain reusable across tools while still supporting
-reliable and auditable execution in DOE environments. Completion criterion:
-representative MCP services operate through a common interface and support
-auditable execution for the selected workflows.
+reliable and auditable execution in DOE environments. \textit{Completion
+criterion: representative MCP services operate through a common interface and
+support auditable execution for the selected workflows.}
 
-\paragraph{Milestone 5: End-to-end demonstration and evaluation (Months 7--9).}
-Integrate the full pipeline and demonstrate an end-to-end human-in-the-loop
-workflow spanning outer-loop analysis planning, input generation, simulation
-execution, and post-processing. This milestone will include demonstration with
-multiple analysis drivers and multiple physics codes, including SIERRA and
-SPARC, and will provide the main evidence for AI advantage at the end of
-Phase I. Completion criterion: successful execution of the end-to-end workflow
-for the selected demonstration cases and evaluation against the Phase I
-decision metrics.
+\item \textbf{Milestone 5: End-to-end demonstration and evaluation (Months
+7--9).} Integrate the full pipeline and demonstrate an end-to-end
+human-in-the-loop workflow spanning outer-loop analysis planning, input
+generation, simulation execution, and post-processing. This milestone will
+include demonstration with multiple analysis drivers and multiple physics
+codes, including SIERRA and SPARC, and will provide the main evidence for AI
+advantage at the end of Phase I. \textit{Completion criterion: successful
+execution of the end-to-end workflow for the selected demonstration cases and
+evaluation against the Phase I decision metrics.}
+\end{itemize}
 
 \begin{figure}[t]
 \centering
@@ -449,13 +461,13 @@ decision metrics.
 \foreach \y in {0.2,1.2,2.2,3.2,4.2,5.2,5.8} {
   \draw[gray!40] (0.5,\y) -- (9.5,\y);
 }
-\node[anchor=east,align=right,text width=3.6cm] at (0.35,5.5) {Milestone 1:\\Architecture and workflow representations};
+\node[anchor=east,align=right,text width=3.6cm] at (0.35,5.5) {Milestone 1:\\Physics-code agents};
 \node[anchor=east,align=right,text width=3.6cm] at (0.35,4.5) {Milestone 2:\\Outer-loop analysis agents};
-\node[anchor=east,align=right,text width=3.6cm] at (0.35,3.5) {Milestone 3:\\Physics-code agents};
+\node[anchor=east,align=right,text width=3.6cm] at (0.35,3.5) {Milestone 3:\\Architecture and workflow representations};
 \node[anchor=east,align=right,text width=3.6cm] at (0.35,2.5) {Milestone 4:\\MCP integration and secure execution};
 \node[anchor=east,align=right,text width=3.6cm] at (0.35,1.5) {Milestone 5:\\End-to-end demonstration and evaluation};
 
-\filldraw[fill=blue!35,draw=blue!60] (0.5,5.25) rectangle (2.5,5.75);
+\filldraw[fill=blue!35,draw=blue!60] (0.5,5.25) rectangle (3.5,5.75);
 \filldraw[fill=teal!35,draw=teal!60!black] (1.5,4.25) rectangle (4.5,4.75);
 \filldraw[fill=purple!28,draw=purple!60!black] (2.5,3.25) rectangle (5.5,3.75);
 \filldraw[fill=green!35,draw=green!50!black] (3.5,2.25) rectangle (7.5,2.75);
