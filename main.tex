@@ -63,42 +63,27 @@ partner institutions}
 \clearpage \pagenumbering{arabic}
 
 
-\begin{comment}
-\section{Executive summary} In this Phase-1 proposal, we propose to develop the
-first stage of an agentic AI platform capable of automating the
-hypothesis-to-response workflow within the DoE enterprise. Broadly, we envision
-a platform enabling multi-agent workflows capable of synthesizing scientific
-information, formulating research questions, orchestrating outer-loop analyses
-through established DOE codes (e.g., uncertainty quantification through Dakota),
-setting up and formulating inner-loop model evaluation (with tasks including
-meshing, input-deck generation, model execution in HPC environments),
-goal-oriented post-processing, and hypothesis refinement. In Phase I, we will
-consider a subset of this goal: orchestrationg outer-loop analyses through
-established DoE codes, managing inner loop model evaluations (including input
-deck generation and model execution, but restricting mesh generation), and and
-goal-oriented postprocessing. We will achieve this goal through a coordinated
-multiagent workflow working within a Model Context Protocol (MCP) interface. MCP
-will be used to homogonize the toolcalling, model execution, and 
-\end{comment}
 
-\section{Background/Introduction} Agentic
-artificial intelligence (AI) is poised to transform analysis and
-hypothesis-driven computational science workflows within DOE.
-Traditionally, these workflows depend on scientists and engineers translating
-hypotheses into end-to-end computational studies. This process includes
-designing outer-loop analyses such as optimization or uncertainty
-quantification, constructing computational experiments, executing large-scale
-simulation codes, post-processing quantities of interest, and drawing conclusions or refining the experiment and repeating. In many cases,
-the dominant bottleneck is in this process not compute cost, but the human effort required to
-generate, execute, validate, and refine the workflow.
+\section{Background/Introduction} 
+Agentic artificial intelligence (AI) is poised to transform computational
+science within DOE.  Traditionally, progress within computational
+science has depended on the ability to generate a hypothesis from a myriad of
+sources, translate this hypothesis to a computational study, analyze the
+resulting data, and refine the next step.  In practice, this process requires
+scientists and engineers to connect
+scientific intent to outer-loop analyses, construct computational experiments,
+execute large-scale simulation codes,analyze the results, and draw conclusions
+or refine the experiment and repeat.  In many cases, the dominant bottleneck is
+in this process not compute cost, but the human effort required to generate,
+execute, validate, and refine the workflow.
 
 Recent advances in agentic AI are beginning to shift this paradigm. Commercial
-systems such as Claude, Codex, and Cursor—paired with frontier large language
-models (LLMs)—enable users to orchestrate complex workflows, autonomously
+systems such as Claude, Codex, and Cursor --- paired with frontier large language
+models (LLMs) --- enable users to orchestrate complex workflows, autonomously
 analyze results, and respond to sophisticated scientific queries. While these
 capabilities have primarily emerged within coding environments, the underlying
 LLMs and agentic technologies show strong promise for more ambitious scientific
-workflows and underpin emerging concepts such as the ``AI Scientist''~\cite{lu2024aiscientistfullyautomated}. Early examples already exist in areas such as computational fluid dynamics~\cite{PaRaWa25,yue2026foamagentautomatedintelligentcfd,chen2024metaopenfoamllmbasedmultiagentframework,FENG2026100620} and finite element analysis~\cite{qi2025feagptendtoendagenticaifinite}. These developments point to a
+workflows and underpin emerging concepts such as the ``AI Scientist''~\cite{lu2024aiscientistfullyautomated} and automated modeling and simulation in, for example, computational fluid dynamics~\cite{PaRaWa25,yue2026foamagentautomatedintelligentcfd,chen2024metaopenfoamllmbasedmultiagentframework,FENG2026100620} and finite element analysis~\cite{qi2025feagptendtoendagenticaifinite}. These developments point to a
 transformative opportunity for the DOE enterprise.
 
 Realizing this vision within DOE, however, requires significant advances.
