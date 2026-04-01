@@ -450,6 +450,7 @@ execution of the end-to-end workflow for the selected demonstration cases and
 evaluation against the Phase I decision metrics.}
 \end{itemize}
 
+\begin{comment}
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[x=1.0cm,y=0.78cm,font=\small]
@@ -476,23 +477,20 @@ evaluation against the Phase I decision metrics.}
 \caption{Nine-month Gantt chart for the major Phase I milestones.}
 \label{fig:gantt}
 \end{figure}
-
+\end{comment}
 
 \section{Data Sources and Models}
 The project will leverage diverse data sources associated with computational
-science workflows, including input decks, technical documentation, and case
+science workflows, including input decks, documentation, and case
 results for the target analysis tools and simulation codes. These materials
-will provide the basis for retrieval, workflow grounding, evaluation, and the
+will provide the basis for RAG pipelines, feature engineering, validation, and the
 construction of representative benchmark tasks. The team already has access to
 a substantial amount of these data through existing codebases, example
-repositories, prior studies, and internal technical materials. If the project
-is funded, we will also expand these holdings by collecting additional example
-workflows, validated inputs, and execution traces needed to broaden coverage of
-the target codes and use cases. These sources include the types of technical
+repositories, prior studies, and internal technical materials. These sources include the types of technical
 artifacts already used in prior team efforts such as FOAM-agent, which provide
-an initial base for the open-source thread of the proposed work.
+an initial base for the open-source thread of the proposed work. The team is capable of collecting additional example workflows, validated input decks, etc., as needed. 
 
-On the model side, the project will use generic APIs so that the framework can
+On the model side, the project will utilize generic APIs so that the framework can
 integrate with a suite of LLMs rather than depending on a single model
 provider. In particular, the effort will focus jointly on frontier models from
 OpenAI and on open-source models currently hosted at Sandia through Shirty
@@ -502,37 +500,37 @@ open-source thread of the project, we will also assess integration with and
 comparison to existing open-source and commercial agentic frameworks in order
 to position GENESIS-AGENT relative to the current state of practice.
 
-\section{Decision Gate Metrics} The Phase I go/no-go decision will be based on
-quantitative evidence that the framework provides a credible AI advantage for
-scientific workflow generation and execution. We propose the following metrics:
+\section{Decision Gate Metrics}
+The Phase I go/no-go decision will be based on whether GENESIS-AGENT
+demonstrates a measurable AI advantage on representative benchmark workflows.
+This will be assessed through three decision gates:
 
-\begin{itemize} \item \textbf{Input validity:} fraction of generated input decks
-and workflow files that pass syntax and schema validation without manual
-correction.  \item \textbf{Execution success:} fraction of benchmark tasks that
-reach a successful run or study launch within a bounded number of corrective
-iterations.  \item \textbf{Editing burden reduction:} reduction in expert manual
-editing time relative to a baseline workflow setup process.  \item
-\textbf{Workflow completeness:} fraction of required workflow components
-correctly generated, including dependent files, study definitions, and analysis
-steps.  \item \textbf{Scientific fidelity:} agreement of framework-generated
-workflows and outputs with expert-constructed reference workflows on
-representative tasks.  \item \textbf{ROM utility:} demonstrated cases in which
-the framework appropriately supports a reduced-order workflow that preserves
-decision-relevant accuracy while lowering computational cost.  \item
-\textbf{Secure deployability:} successful end-to-end operation of the prototype
-using only open-source orchestration and self-hosted model serving in a
-DOE-compatible environment.  \item \textbf{Human adaptation gain:} measurable
-improvement in benchmark performance after incorporating structured expert
-feedback.  \item \textbf{Model modularity:} successful operation of the same
-front-end framework with multiple approved back-end models without redesign of
-the workflow layer.  \item \textbf{Transferability of tooling:} successful reuse
-of orchestration and deployment components across more than one workflow class
-or code environment.  \end{itemize}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.2em,topsep=0.2em]
+\item \textbf{Decision Gate 1: Workflow generation and execution.} The system
+must generate valid workflows and successfully execute representative
+tasks across the selected benchmark problems. A successful outcome is that at
+least 70\% of benchmark cases produce valid inputs and at least 50\% complete
+end-to-end execution with bounded human intervention.
 
-A successful Phase I outcome will show that an open, on-premises framework can
-reliably generate and execute scientifically meaningful computational workflows,
-while giving Sandia a controllable path to adapt the capability to
-laboratory-specific requirements.
+\item \textbf{Decision Gate 2: Human-effort reduction.} The system must reduce
+the expert effort required to set up, validate, and run representative studies.
+A successful outcome is a measurable reduction in hands-on setup and debugging
+time relative to a baseline manual workflow, with a target reduction of at
+least 2$\times$ on the selected demonstration cases.
+
+\item \textbf{Decision Gate 3: AI advantage through scaling and adaptation.}
+The system must show improved performance as additional AI-relevant resources
+are applied, including more retrieval data, stronger models, or expanded tool
+context. A successful outcome is monotonic improvement in at least one key
+metric, such as input validity, execution success rate, or reduction in human
+editing burden, when these resources are increased. 
+\end{itemize}
+
+Together, these decision gates evaluate whether the Phase I effort has produced
+a credible foundation for transformative AI-enabled science and engineering:
+the system must work on realistic workflows, reduce expert effort in a
+quantifiable way, and exhibit scaling behavior that supports continued
+improvement in Phase II.
 
 \clearpage \appendix \section*{Appendix 1: Bibliography and References Cited}
 \nocite{dakota_docs}
