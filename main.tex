@@ -73,8 +73,8 @@ scientists and engineers to connect
 scientific intent to outer-loop analyses, construct computational experiments,
 execute large-scale simulation codes, analyze the results, and draw conclusions
 or refine the experiment and repeat.  In many cases, the dominant bottleneck is
-in this process not compute cost, but the human effort required to generate,
-execute, validate, and refine the workflow.
+in this process not the cost of the computations, but the human effort required to generate,
+execute, validate, and refine the study.
 
 Recent advances in agentic AI are beginning to shift this paradigm. Commercial
 systems such as Claude, Codex, and Cursor --- paired with frontier large language
@@ -87,7 +87,7 @@ transformative opportunity for the DOE enterprise.
 
 Realizing this vision within DOE, however, requires significant advances.
 Existing agentic systems have demonstrated success in constrained environments
-with narrowly defined objectives, but DOE workflows are radically more diverse. These workflows have multiple entry points, involve a myriad of analysis tools and a
+with narrowly defined objectives, but scientific reasoning within DOE environments is inherently more diverse, often requiring cross-domain expertise and specialized experience. For example, workflows within DOE have multiple entry points, involve a myriad of analysis tools and a
 broad range of simulation codes, each with distinct input formats, execution
 requirements, and post-processing pipelines. Effective use of these tools also
 requires detailed knowledge of HPC systems, data management, and
@@ -102,9 +102,7 @@ downstream impacts. While agentic AI systems are powerful, they are not
 infallible, and there remains a substantial trust gap between what these
 systems can do and what users are willing to rely on. For these systems to be
 useful for DOE analysis, they must be coupled to rigorous verification and validation 
-and be designed to include human-in-the-loop oversight.
-
-Lastly, we emphasize that these technical challenges are further aimplified by the security and operational
+and be designed to include human-in-the-loop oversight. Lastly, these technical challenges are further amplified by the security and operational
 constraints of the DOE environment. Agentic AI systems within DOE must operate
 under substantially stricter requirements than those in commercial or academic
 settings, including constraints on data movement, the need for on-premises LLM deployments, and careful management of interactions between
@@ -133,13 +131,13 @@ workflows.
 In Phase I, the objective is to deliver a minimal-working-framework of GENESIS-AGENT and
 demonstrate an AI advantage through the ability to perform end-to-end agent-driven,
 human-in-the-loop scientific workflows for a subset of DOE tools. Specifically,
-we will focus on demonstrating full execution of outer-loop workflows
+we will focus on demonstrating full execution of outer-loop problems
 (inverse problems, uncertainty quantification) using candidate Sandia software
 products (e.g., Dakota for outer-loop analysis, SIERRA for computational
 physics) and open-source products (e.g., Open-FOAM). %The AI advantage will
 %be measured by the reduction in human-time effort to execute, validate, and
 %process the workflow. 
-The proposed objectives lead to an AI advantage by reducing the human effort
+The proposed objectives lead to an AI advantage by radically reducing the human effort
 required to formulate, validate, execute, and refine computational studies
 without removing the human from the decision-making loop. Instead of requiring
 users to manually develop studies and monitor jobs, the framework will provide
@@ -179,12 +177,12 @@ computational studies.
 \section{Proposed Research and Methods}
 %In Phase I, we propose to design and demonstrate a minimum working version of
 %GENESIS-AGENT.
-Our central hypothesis is that an AI advantage for scientific reasoning within DOE will not emerge from increasingly capable monolithic agents, but from the development of structured representations and orchestration mechanisms that enable reliable coordination of role-specialized agents across heterogeneous modeling and simulation workflows.
-%but rather from role-specialized, multi-agent systems that integrate human-in-the-loop refinement with structured representations of scientific workflows, multi-modal and retrieval-grounded reasoning, standardized tool interfaces, and iterative self-correction. 
-To this end, we propose GENESIS-AGENT: a multi-agent framework for scientific reasoning in which task-specific agents rely on structured workflow representations to orchestrate and execute complex workflows, retrieval-augmented generation (RAG)~\cite{lewis2021retrievalaugmentedgenerationknowledgeintensivenlp} enables the synthesis of multimodal and proprietary information, and the Model Context Protocol (MCP) provides standardized access to reusable capabilities such as job submission, monitoring, and data management.
-These tools will be implemented in a closed loop fashion, enabling GENESIS-Agent to parse logs, identify errors, and feed this context into a correction loop. Our key innovations are: (i) structured workflow representations that enable agents to reason over complex outer-loop analyses; (ii) validation mechanisms to ensure correctness and reliability of agent-generated workflows; and (iii) a scalable, heterogeneous framework that supports interoperable and interchangeable agentic tools across diverse simulation ecosystems.
-This effort will build directly on prior team experience developing
-Foam-Agent~\cite{yue2026foamagentautomatedintelligentcfd}, an agentic framework for translating natural-language requests into
+Our central hypothesis is that an AI advantage for scientific reasoning within DOE will not emerge from increasingly capable monolithic agents, but rather from role-specialized, multi-agent systems that integrate human-in-the-loop refinement.
+%with structured representations of scientific workflows, multi-modal and retrieval-grounded reasoning, standardized tool interfaces, and iterative self-correction. 
+To this end, we propose GENESIS-AGENT as a multi-agent framework for scientific reasoning in which task-specific agents rely on structured workflow representations to orchestrate and execute complex workflows. We will augment GENESIS-AGENT with retrieval-augmented generation (RAG)~\cite{lewis2021retrievalaugmentedgenerationknowledgeintensivenlp} pipelines to enable the synthesis of multimodal and proprietary information, and develop Model Context Protocol (MCP) severs to provide standardized access to tooling and enable plug-and-play coordination with different agentic technologies. 
+These tools will be implemented in a closed loop fashion, enabling GENESIS-Agent to parse logs, identify errors, and feed this context into a correction loop. Our key innovations are: (i) structured workflow representations that enable agents to reason over complex outer-loop analyses; (ii) validation mechanisms to ensure correctness and reliability of agent-generated workflows; and (iii) a scalable, heterogeneous framework that supports interoperable and interchangeable agentic tools across diverse simulation ecosystems. To the best of our knowledge, the proposed work will comprise the first agentic technology designed to reason across multiple physics codebases and analysis drivers. 
+This effort will build directly on co-Pi Dr. Pan's experience developing
+Foam-Agent~\cite{yue2026foamagentautomatedintelligentcfd}, which is an agentic framework for translating natural-language requests into
 executable OpenFOAM workflows. Foam-agent provides a concrete starting point
 for several of the ideas proposed here, including retrieval over technical
 documentation, code execution, and workflow verification and revision. 
@@ -284,7 +282,7 @@ LLM interface remains deployment-agnostic.}
 \end{comment}
 %\subsection*{Technical Approach}
 
-Our proposed work in Phase I can be classifed by three aims: (1) specialized agent development and orchestration, (2) MCP layers and tool development, and (3) end-to-end demonstration and evaluation. The remainder of this section describes these aims in more detail. 
+Our proposed work in Phase I can be classified by three aims: (i) the development of structured representations of scientific workflows and modeling and simulation which agents can reason over, (ii) the development of task-specific agents and MCP severs to enable flexible integration with different agentic paradimgs, and (iii) end-to-end demonstration and evaluation. The remainder of this section describes these aims in more detail. 
 %Methodologically, the Phase I effort will focus on several open questions that
 %we view as central to this area. First, how should simulation workflows be
 %represented so that agents can reason over them reliably and in a verifiable
@@ -294,9 +292,42 @@ Our proposed work in Phase I can be classifed by three aims: (1) specialized age
 %they are reusable without becoming brittle? Finally, how should validation and
 %human review be coupled to agent decisions so that the resulting system is
 %trustworthy and auditable?
+\paragraph{Aim 1: Structured workflow representations for agentic scientific computing.} A central technical challenge in GENESIS-AGENT is to define structured workflow representations for scientific reasoning that agents can reliably reason over, verify, and refine under human supervision. 
+Inspired by the NexGen workflow system within Sandia's Analysis Workbench, we propose representing these workflows with a structure graph, whose nodes represent tasks (e.g., input generation, execution, analysis), and whose edges encode data dependencies and outputs. 
+In Phase I, we will develop schema-based representations for a myriad of such reasoning graphs, focusing on decomposing outer-loop workflows into executable tasks, required inputs and files, validation checks, model execution, and outputs. These representations serve as the glue between user requests, agent reasoning, simulation codes, and outer-loop analysis tools, and root planning and execution in explicit workflow objects that can be inspected by users, validated automatically, and reused across codes and workflows. To the best of our knowledge, this will be the first such effort to define structured workflow graphs that operate over both outer loop workflows (inverse problems, uncertainty quantification {\color{red} Shawou, have you seen this?}) and multiple full-sclae simulation codes. 
+\textit{Lead:
+[PI/Co-PI names]. Budget: [insert amount or \% effort].}
 
+\paragraph{Aim 2: Specialized agent development and orchestration with MCP-enabled tool use.} Building on the workflow representations from Aim 1, we will develop a hierarchical suite of task-specific agents that plan, execute, and refine scientific workflows, along with the development of the orchastration framework to interweave these agents to achieve end-to-end reasoning. In defining this hierarchy, we address the ability of agentic workflows to scale to diverse environments by representing task-specific agents as tools, and subsequently constraining the tools available to each agent, exposing only what is necessary to facilitate agent reasoning and mitigate agents that drift from their intended use. 
+
+While we ultimately envision a \textit{research agent} capable of parsing diverse data sources to formulate new hypotheses, in Phase I we will start with a \textit{planning agent} that decomposes a pre-defined hypothesis or user request into a structured workflow and coordinates downstream actions. The planning agent will be explicitly centered on \textit{human-in-the-loop} interactions: leveraging the structured workflow representations defined in Aim 1, the agent will propose an initial plan, present the resulting workflow representation for human review, and revise that plan based on feedback before execution proceeds. Once finalized, the planner will interface with a collection of \emph{specialized agents}, including code-specific agents tailored to individual simulation tools (e.g., Sierra/Aria, OpenFOAM, Dakota) and \textit{execution agents} tailored to submitting and managing HPC jobs. The code-specific agents will encode detailed knowledge of input-deck construction, solver configuration, execution workflows, and post-processing, while the execution agents will encode knowledge of HPC environments, resource availability, and job submission. To facilitate the ability of these agents to navigate DOE's complex computational ecosystem, we will develop retrieval augmented generation (RAG) pipelines to synthesize relevant context into the decision process. These tool-specific retrieval pipelines will treat documentation, prior workflows, and validated inputs as retrievable knowledge sources at inference time, thereby enabling deployment on codebases not seen within LLM training. To effectively manage multimodal information, these retrieval pipelines will leverage hybrid search strategies~\cite{edge2025localglobalgraphrag,formal2021spladesparselexicalexpansion,yue2026foamagentautomatedintelligentcfd}, combining, for example, similarity searches on embeddings with keyword matching and metadata
+constraints to identify relevant context. 
+
+
+To support reusable and standardized access to tools, we
+will integrate the Model Context Protocol (MCP) as the interface layer for
+shared capabilities. 
+In this architecture, agents reason over structured workflow objects and invoke
+MCP services when interaction with specialized agents or reusable software
+components is required, creating a clean separation between reasoning and
+execution. This abstraction also provides insulation from the rapidly evolving
+landscape of agentic AI. Rather than coupling GENESIS-AGENT to a specific
+framework, MCP enables interoperability with both internally developed and
+commercial agentic systems.
+By defining capabilities through MCP, they
+can be accessed by any agentic framework that supports the protocol. For
+example, an agent specialized in constructing input decks for a physics
+simulation can expose its functionality as a callable tool, enabling external
+frameworks (e.g., Claude or Codex) to leverage DOE-specific expertise while preserving
+control over interfaces, execution, and security.
+
+%A central research question in this aim is the choice of interface granularity: MCP interfaces that are too fine-grained become delicate and increase the probability of inappropriate tool use, while interfaces that are too coarse reduce reuse across workflows. In parallel, we will develop retrieval-augmented generation (RAG) pipelines so that code-specific agents can ground their decisions in technical documentation, prior workflows, and validated inputs that are not present in model training data. These retrieval pipelines will leverage hybrid search strategies~\cite{edge2025localglobalgraphrag,formal2021spladesparselexicalexpansion,yue2026foamagentautomatedintelligentcfd}, combining similarity search over embeddings with keyword matching and metadata constraints to identify relevant context at inference time.  \textit{Lead: [PI/Co-PI names].  Budget: [insert
+%amount or \% effort].}
+%}
+
+\begin{comment}
 \textbf{Aim 1: Structured agent orchestration and workflow representations.}
-The primary research contribution of this project is the development of a structured framework for coordinating role-specialized agents across the modeling and simulation lifecycle. Rather than treating agent interactions as loosely coupled prompt exchanges, we will develop workflow representations that explicitly encode task decomposition, data dependencies, intermediate artifacts, and provenance. These representations will serve as the substrate over which agents reason, communicate, and compose multi-stage workflows.
+The primary research contribution of this project is the development of a structured framework for coordinating role-specialized agents across the modeling and simulation lifecycle. Rather than treating agent interactions as loosely coupled prompt exchanges, we will develop workflow representations that explicitly encode task decomposition and task dependencies. These representations will serve as the layer over which agents reason, communicate, and compose multi-stage workflows.
 
 We will design a hierarchical orchestration framework in which a planning agent maps high-level scientific intent to a structured workflow graph, whose nodes represent tasks (e.g., input generation, execution, analysis) and whose edges encode data and control dependencies. Downstream agents—including code-specific agents for simulation tools (e.g., SIERRA, OpenFOAM), execution agents for HPC environments, and analysis agents for post-processing—will operate over this shared representation, ensuring consistency across stages and enabling partial execution, validation, and refinement.
 
@@ -325,7 +356,7 @@ constraints to identify relevant context. \textit{Lead:
 %While the main focus will be integration of these tools into GENESIS-AGENT, we propose to develop them in a stand-alone manner such they can be broadly accessed and provide MCP tools of general use to DOE. We emphasize that, while various MCP tools are stand-alone actions, more sophisticated ones may be agentic systems themselves. 
 A central research question we aim to address is the choice of interface granularity: interfaces that are too fine-grained become delicate and increase the probability of inappropriate tool use, while interfaces that are too coarse reduce reuse across codes.  \textit{Lead: [PI/Co-PI names].  Budget: [insert
 amount or \% effort].}
-
+\end{comment}
 \paragraph{Aim 3: End-to-end demonstration of closed-loop scientific reasoning.} The third aim is to integrate the full pipeline into an end-to-end demonstrate in which the system synthesizes a natural language hypothesis, proposes a structured plan for an outer-loop
 analysis, refines the plan with a human reviewer, generates the necessary simulation and analysis inputs, executes
 the workflow, interprets the outputs, and returns recommended follow-on actions. The demonstration will demonstrate that GENESIS-AGENT can recommend actions and complete analyses across at least two outer-loop analysis drivers, including Dakota, and at least three physics codebases: SIERRA/Solid Mechanics, SPARC, and OpenFOAM. \textit{Lead: [PI/Co-PI names]. Budget:
@@ -429,7 +460,7 @@ results for the target analysis tools and simulation codes. These materials
 will provide the basis for RAG pipelines, feature engineering, and validation. The team already has access to a substantial amount of these data through past work, internal technical materials, and open-source code bases. These sources include the types of technical artifacts already used in prior team efforts such as Foam-Agent. The team is capable of collecting additional supporting data as needed. 
 
 On the model side, the project will intentionally utilize generic APIs so that the framework can integrate with a suite of LLMs rather than depending on a single model
-provider. In particular, the effort will focus jointly on frontier models from OpenAI and open-source models currently hosted on premises at Sandia through Shirty Microservices. This will allow us to evaluate both capability and deployment tradeoffs while maintaining a backend-agnostic software architecture. We will also assess integration with and
+provider. In particular, the effort will focus jointly on frontier models and open-source models currently hosted on premises at Sandia through Shirty Microservices. This will allow us to evaluate both capability and deployment tradeoffs while maintaining a backend-agnostic software architecture. We will also assess integration with and
 comparison to existing open-source and commercial agentic frameworks in order to position GENESIS-AGENT relative to the current state of practice.
 
 \section{Decision Gate Metrics}
